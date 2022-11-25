@@ -20,4 +20,4 @@ RUN apk --no-cache --update add libffi libressl postgresql-libs gcc libc-dev
 
 COPY . .
 
-CMD ["uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0"]
+CMD ["pytest"]
