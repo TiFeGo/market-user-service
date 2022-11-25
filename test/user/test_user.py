@@ -2,7 +2,7 @@ import pytest
 from httpx import AsyncClient
 from faker import Faker
 
-from app.endpoints.auth.jwt import create_access_token
+from src.endpoints.auth.jwt import create_access_token
 from test.conf_test_db import app
 
 

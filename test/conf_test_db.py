@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.db.database import Base, get_db
-from app.main import app
-from app.core.settings import settings
+from src.db.database import Base, get_db
+from src.main import app
+from src.core.settings import settings
 
 DATABASE_USERNAME = settings.DATABASE_USERNAME
 DATABASE_PASSWORD = settings.DATABASE_PASSWORD

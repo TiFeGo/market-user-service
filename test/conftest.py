@@ -1,6 +1,6 @@
 import pytest
 
-from app.models.user import User
+from src.models.user import User
 
 
 @pytest.fixture(autouse=True)
