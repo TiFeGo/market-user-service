@@ -3,8 +3,8 @@ from typing import List, Optional
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.models import user
-from app.schemas import schemas
+from src.models import user
+from src.schemas import schemas
 
 
 async def new_user_register(

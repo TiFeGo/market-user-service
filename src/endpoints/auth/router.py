@@ -5,9 +5,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 
-from app.db import database as db
-from app.utils import hashing
-from app.models.user import User
+from src.db import database as db
+from src.utils import hashing
+from src.models.user import User
 
 from .jwt import create_access_token
 
