@@ -29,8 +29,7 @@ async def create_user_registration(request: schemas.User, database: Session = De
 
 @user_router.get('/', status_code=status.HTTP_200_OK, response_model=List[schemas.DisplayUser])
 async def get_all_users(
-        database: Session = Depends(db.get_db),
-        current_user: schemas.User = Depends(get_current_user)
+        database: Session = Depends(db.get_db)
 ):
     return await services.all_users(database)
 
@@ -38,8 +37,7 @@ async def get_all_users(
 @user_router.get('/{user_id}', status_code=status.HTTP_200_OK, response_model=schemas.DisplayUser)
 async def get_user_by_id(
         user_id: int,
-        database: Session = Depends(db.get_db),
-        current_user: schemas.User = Depends(get_current_user)
+        database: Session = Depends(db.get_db)
 ):
     return await services.get_user_by_id(user_id, database)
 
@@ -47,7 +45,6 @@ async def get_user_by_id(
 @user_router.delete('/{user_id}', status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
 async def delete_user_by_id(
         user_id: int,
-        database: Session = Depends(db.get_db),
-        current_user: schemas.User = Depends(get_current_user)
+        database: Session = Depends(db.get_db)
 ):
     return await services.delete_user_by_id(user_id, database)
