@@ -7,6 +7,7 @@ from src.endpoints.auth.jwt import get_current_user
 from src.schemas import schemas
 from src.endpoints import services
 from src.utils import validator
+from src.core import tracing_tools
 
 user_router = APIRouter(
     tags=['Users'],
@@ -15,6 +16,7 @@ user_router = APIRouter(
 
 
 @user_router.post('/', status_code=status.HTTP_201_CREATED, response_model=schemas.DisplayUser)
+@tracing_tools.trace_it('Endpoint', 'Create user')
 async def create_user_registration(request: schemas.User, database: Session = Depends(db.get_db)):
     user = await validator.verify_email_exists(request.email, database)
     if user is not None:
@@ -28,6 +30,7 @@ async def create_user_registration(request: schemas.User, database: Session = De
 
 
 @user_router.get('/', status_code=status.HTTP_200_OK, response_model=List[schemas.DisplayUser])
+@tracing_tools.trace_it('Endpoint', 'Get all users')
 async def get_all_users(
         database: Session = Depends(db.get_db)
 ):
@@ -35,6 +38,7 @@ async def get_all_users(
 
 
 @user_router.get('/{user_id}', status_code=status.HTTP_200_OK, response_model=schemas.DisplayUser)
+@tracing_tools.trace_it('Endpoint', 'Get user by id')
 async def get_user_by_id(
         user_id: int,
         database: Session = Depends(db.get_db)
@@ -43,6 +47,7 @@ async def get_user_by_id(
 
 
 @user_router.delete('/{user_id}', status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
+@tracing_tools.trace_it('Endpoint', 'Delete user by id')
 async def delete_user_by_id(
         user_id: int,
         database: Session = Depends(db.get_db)

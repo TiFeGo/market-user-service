@@ -5,8 +5,10 @@ from sqlalchemy.orm import Session
 
 from src.models import user
 from src.schemas import schemas
+from src.core import tracing_tools
 
 
+@tracing_tools.trace_it('Service', 'Create new user')
 async def new_user_register(
         request: schemas.User,
         database: Session
@@ -18,6 +20,7 @@ async def new_user_register(
     return new_user
 
 
+@tracing_tools.trace_it('Service', 'Get all users')
 async def all_users(
         database: Session
 ) -> List[user.User]:
@@ -25,6 +28,7 @@ async def all_users(
     return users
 
 
+@tracing_tools.trace_it('Service', 'Get user by id')
 async def get_user_by_id(
         user_id: int,
         database: Session
@@ -35,6 +39,7 @@ async def get_user_by_id(
     return user_info
 
 
+@tracing_tools.trace_it('Service', 'Delete user by id')
 async def delete_user_by_id(
         user_id: int,
         database: Session
