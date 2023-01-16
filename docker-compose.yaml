@@ -3,6 +3,11 @@ version: '3'
 volumes:
   user_db:
 
+networks:
+  network:
+    name: microservices
+    external: true
+
 services:
 
   user_service:
@@ -13,7 +18,7 @@ services:
     links:
       - user_db
     ports:
-      - '8081:8000'
+      - '8002:8000'
     depends_on:
       - user_db
     environment:
@@ -26,8 +31,6 @@ services:
     image: postgres
     restart: always
     container_name: ns-user-db
-    ports:
-      - '32700:5432'
     volumes:
       - user_db:/var/lib/postgresql/data
     environment:
